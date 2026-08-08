@@ -25,6 +25,8 @@
 | Entregable: Documento técnico                                        | [`documentoTecnico.pdf`](./documentoTecnico.pdf) |
 
 ## Compilar y ejecutar
+Para agregar o modificar datos de los `.dat` defauls, editar [Datos.c](./src/Datos.c)
+
 ```bash
 make
 ./practica1
