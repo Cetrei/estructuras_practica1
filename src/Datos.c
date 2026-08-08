@@ -1,7 +1,13 @@
 #include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include "Datos.h"
 #include "Tipos.h"
+
+void asegurarDirectorioDatos(void) {
+    mkdir(DIRECTORIO_DATOS, 0755);
+}
 
 void generarEstudiantes(const char* nombreArchivo) {
     FILE* archivo;
@@ -12,6 +18,8 @@ void generarEstudiantes(const char* nombreArchivo) {
         {"2019987654", "Sebastian", "Rojas Badilla", "Ingenieria en Sistemas", 6},
         {"2021555222", "Santiago", "Chavarria Solis", "Ingenieria en Sistemas", 2}
     };
+
+    asegurarDirectorioDatos();
 
     archivo = fopen(rutaFinal, "wb");
     fwrite(estudiantes, sizeof(Estudiante), 3, archivo);
@@ -29,6 +37,8 @@ void generarHistoriales(const char* nombreArchivo) {
         {"2020123456", "EIF210", "Sistemas Operativos", 1, 2026, 78.0f},
         {"2019987654", "EIF310", "Redes", 2, 2026, 91.5f}
     };
+
+    asegurarDirectorioDatos();
 
     archivo = fopen(rutaFinal, "wb");
     fwrite(historiales, sizeof(Historial), 5, archivo);

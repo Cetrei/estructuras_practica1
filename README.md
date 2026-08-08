@@ -3,9 +3,10 @@
 ![C](https://img.shields.io/badge/C-implementación-A8B9CC?logo=c&logoColor=white)
 ![Docs: Doxygen](https://img.shields.io/badge/docs-doxygen-2C4AA8?logo=doxygen&logoColor=white)
 ![Build: Make](https://img.shields.io/badge/build-make-427819?logo=gnu&logoColor=white)
+![Pages](https://github.com/Cetrei/estructuras_practica1/actions/workflows/pages.yml/badge.svg)
 
 ## Documentación en línea
-**https://Cetrei.github.io/practica1/**
+**https://Cetrei.github.io/estructuras_practica1/**
 
 ## Requisitos
 
@@ -18,6 +19,7 @@
 | Parte 3: Búsqueda secuencial del estudiante por carnet               | [`src/Registros.c`](./src/Registros.c)     |
 | Parte 4:  Reporte con el formato exacto del enunciado                | [`src/Reporte.c`](./src/Reporte.c)         |
 | Flujo principal del programa                                         | [`src/Controlador.c`](./src/Controlador.c) |
+| Captura manual de datos (menu)                                       | [`src/Captura.c`](./src/Captura.c)         |
 | Entregable: Código fuente documentado                                | Comentarios tipo JSDocs en todo [`include/`](./include) |
 | Entregable: Programa ejecutable                                      | Generado con `make` |
 | Entregable: Documento técnico                                        | [`documentoTecnico.pdf`](./documentoTecnico.pdf) |

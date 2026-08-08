@@ -7,11 +7,15 @@
 #include "Registros.h"
 #include "Reporte.h"
 #include "Datos.h"
+#include "Captura.h"
 #include "Mensajes.h"
 #include "Resultado.h"
 
 #define OPCION_GENERAR_DATOS 1
 #define OPCION_USAR_EXISTENTES 2
+
+#define OPCION_DATOS_PRUEBA_FIJOS 1
+#define OPCION_DATOS_MANUALES 2
 
 /**
  * @brief Muestra el menu de inicio y lee la opcion escogida por el usuario
@@ -30,11 +34,58 @@ static int pedirOpcionDelMenu(void) {
 }
 
 /**
- * @brief Pregunta al usuario si desea generar datos de prueba o usar los archivos existentes
+ * @brief Muestra el submenu de origen de los datos de prueba y lee la opcion escogida
+ * @return Opcion ingresada por teclado, sin validar
+ *
+ * Se muestra unicamente cuando ya se decidio sobrescribir los archivos, por lo que
+ * siempre va acompanado de MENSAJE_SUBMENU_ADVERTENCIA dejando claro que se borra
+ * el contenido actual de estudiantes.dat e historial.dat
+ */
+static int pedirOpcionSubmenuDatos(void) {
+    int opcion;
+
+    printf("%s\n", MENSAJE_SUBMENU_ADVERTENCIA);
+    printf("%s\n", MENSAJE_SUBMENU_OPCION_FIJOS);
+    printf("%s\n", MENSAJE_SUBMENU_OPCION_MANUAL);
+    printf("%s", MENSAJE_SUBMENU_PROMPT);
+    scanf("%d", &opcion);
+
+    return opcion;
+}
+
+/**
+ * @brief Resuelve la opcion de "generar/sobrescribir datos de prueba" del menu principal
  * @return void
  *
- * Repite la pregunta hasta recibir una opcion valida. Si se escoge generar datos, crea
- * estudiantes.dat e historial.dat de prueba mediante generarEstudiantes() y generarHistoriales()
+ * Pregunta si se quieren los datos de prueba fijos (generarEstudiantes()/generarHistoriales())
+ * o si se prefiere introducirlos a mano (capturarEstudiantes()/capturarHistoriales(), modulo
+ * Captura.c). Ambos caminos sobrescriben estudiantes.dat e historial.dat por completo.
+ */
+static void generarDatosDePrueba(void) {
+    int opcion = pedirOpcionSubmenuDatos();
+
+    while (opcion != OPCION_DATOS_PRUEBA_FIJOS && opcion != OPCION_DATOS_MANUALES) {
+        printf("%s\n", MENSAJE_MENU_OPCION_INVALIDA);
+        opcion = pedirOpcionSubmenuDatos();
+    }
+
+    if (opcion == OPCION_DATOS_PRUEBA_FIJOS) {
+        generarEstudiantes(NULL);
+        generarHistoriales(NULL);
+        printf("%s\n", MENSAJE_DATOS_GENERADOS);
+    } else {
+        capturarEstudiantes(ARCHIVO_ESTUDIANTES);
+        capturarHistoriales(ARCHIVO_HISTORIAL);
+        printf("%s\n", MENSAJE_DATOS_CAPTURADOS);
+    }
+}
+
+/**
+ * @brief Pregunta al usuario si desea generar/sobrescribir datos de prueba o usar los archivos existentes
+ * @return void
+ *
+ * Repite la pregunta hasta recibir una opcion valida. Si se escoge sobrescribir, delega en
+ * generarDatosDePrueba() el submenu que decide entre datos fijos o captura manual.
  */
 static void prepararArchivos(void) {
     int opcion = pedirOpcionDelMenu();
@@ -45,9 +96,7 @@ static void prepararArchivos(void) {
     }
 
     if (opcion == OPCION_GENERAR_DATOS) {
-        generarEstudiantes(NULL);
-        generarHistoriales(NULL);
-        printf("%s\n", MENSAJE_DATOS_GENERADOS);
+        generarDatosDePrueba();
     }
 }
 

@@ -11,6 +11,7 @@
 \usepackage{array}
 \usepackage{hyperref}
 \usepackage{titlesec}
+\usepackage{setspace}
 
 \definecolor{codebg}{RGB}{245,245,245}
 \definecolor{codekeyword}{RGB}{0,0,150}
@@ -32,26 +33,58 @@
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 
-\title{
-    \textbf{Práctica \#1 | Documento Técnico} \\
-    \large Fundamentos de Eficiencia Computacional y Tipos de datos Abstractos \\
-    \large Estructura Lineal: Arreglos Dinámicos
-}
-\author{
-    Joanfer Hidalgo Chaves \\
-    Universidad Nacional de Costa Rica \\
-    Escuela de Informática y Computación \\
-    EIF207, Estructuras de Datos \\
-    II Ciclo 2026 -- Msc. Johnny Villalobos Murillo
-}
+\title{Práctica \#1: Documento Técnico}
+\author{Joanfer Hidalgo Chaves}
 \date{\today}
 
 \begin{document}
 \shorthandoff{"}
 
-\maketitle
+\begin{titlepage}
+\centering
+\vspace*{1.5cm}
 
+\Large{\textbf{Práctica \#1: Documento Técnico}}\\[6pt]
+\large{Fundamentos de Eficiencia Computacional y Tipos de Datos Abstractos}\\[6pt]
+Estructura Lineal: Arreglos Dinámicos\\
+
+\vspace{1.5cm}
+
+\textbf{Estudiante:}\\
+Joanfer Hidalgo Chaves
+
+\vspace{1.5cm}
+
+\begin{spacing}{1.8}
+Escuela de Informática y Computación\\
+Universidad Nacional de Costa Rica\\
+EIF207, Estructuras de Datos\\[10pt]
+\textbf{Docente:} \\
+Msc. Johnny Villalobos Murillo\\[1.5cm]
+II Ciclo 2026\\
+\today
+\end{spacing}
+
+\vfill
+\end{titlepage}
+
+\newpage
 \tableofcontents
+
+\begin{center}
+\begin{minipage}{1\textwidth}
+\centering
+\small
+\textbf{Recursos} \\[0.3em]
+Este documento también forma parte del repositorio del proyecto, junto con el código fuente completo y su documentación generada con Doxygen:
+\vspace{0.3em}
+
+\begin{tabular}{ll}
+Repositorio de GitHub: & \url{https://github.com/Cetrei/estructuras_practica1} \\
+Documentación en línea (GitHub Pages): & \url{https://Cetrei.github.io/estructuras_practica1/} \\
+\end{tabular}
+\end{minipage}
+\end{center}
 \newpage
 
 \section{Descripción de las Estructuras Utilizadas}
@@ -198,19 +231,23 @@ La función realiza una cantidad fija de operaciones sin importar el tamaño del
     \item \texttt{fclose}: cerrar el archivo.
 \end{itemize}
 Ninguna de estas operaciones depende de $n$, porque \texttt{fseek} y \texttt{ftell} consultan el tamaño del archivo, no lo recorren
-
-Complejidad real: $O(4)$. $4$ operaciones de E/S (\texttt{fopen}, \texttt{fseek}, \texttt{ftell}, \texttt{fclose})
-Complejidad algorítmica: $O(1)$. Ya que el costo no depende de $n$
-Complejidad espacial: $E(1)$. La función solo reserva variables locales de tamaño fijo.
+\newline \newline
+\textbf{Complejidad real:} $O(4)$. $4$ operaciones de E/S (\texttt{fopen}, \texttt{fseek}, \texttt{ftell}, \texttt{fclose})
+\newline
+\textbf{Complejidad algorítmica:} $O(1)$. Ya que el costo no depende de $n$
+\newline
+\textbf{Complejidad espacial:} $E(1)$. La función solo reserva variables locales de tamaño fijo.
 
 \subsection{cargarHistorial()}
 
 La función abre el archivo, reserva memoria para \texttt{cantidadRegistros} elementos, y realiza una única llamada que transfiere los $n$ registros del archivo al arreglo. 
 La lectura en bloque copia los $n$ registros de forma continua, por lo que internamente crece proporcionalmente a $n$: cada uno de los $n$ registros se copia una vez.
-
-Complejidad real: $O(n + 3)$. $1$ apertura, $1$ reserva de memoria, $n$ registros transferidos, $1$ cierre
-Complejidad algorítmica: $O(n)$. El costo dominante es la transferencia de los $n$ registros
-Complejidad espacial: $E(n)$. Se reserva un arreglo de $n$ elementos de tipo \texttt{Historial}, cuyo tamaño crece proporcionalmente a la cantidad de registros
+\\[0.6cm]
+\textbf{Complejidad real:} $O(n + 3)$. $1$ apertura, $1$ reserva de memoria, $n$ registros transferidos, $1$ cierre
+\newline
+\textbf{Complejidad algorítmica:} $O(n)$. El costo dominante es la transferencia de los $n$ registros
+\newline
+\textbf{Complejidad espacial:} $E(n)$. Se reserva un arreglo de $n$ elementos de tipo \texttt{Historial}, cuyo tamaño crece proporcionalmente a la cantidad de registros
 
 \subsection{calcularEstadisticas()}
 
@@ -222,19 +259,23 @@ La función recorre el arreglo de $n$ historiales una única vez. En cada iterac
     \item y en el peor caso copiar el carnet en ambas comparaciones
 \end{itemize}
 Como estas comparaciones y copias no dependen de $n$ individualmente (son de tamaño fijo, 15 caracteres), el costo por iteración es constante, y se repite $n$ veces.
-
-Complejidad real: $O(n)$. Al ser una iteracion lineal sobre $n$ elementos
-Complejidad algorítmica: $O(n)$
-Complejidad espacial: $E(1)$. La función solo usa variables locales de tamaño fijo
+\\[0.6cm]
+\textbf{Complejidad real:} $O(n)$. Al ser una iteracion lineal sobre $n$ elementos
+\newline
+\textbf{Complejidad algorítmica:} $O(n)$
+\newline
+\textbf{Complejidad espacial:} $E(1)$. La función solo usa variables locales de tamaño fijo
 
 \subsection{buscarEstudiante()}
 
 La función recorre el archivo de estudiantes registro por registro, comparando el carnet de cada uno contra el carnet buscado, hasta encontrar coincidencia o llegar al final. 
 En el peor caso (el carnet buscado es el último registro, o no existe), se leen y comparan los $m$ registros del archivo.
-
-Complejidad real: $O(m + 2)$. $1$ apertura, hasta $m$ lecturas (\texttt{fread}) en el peor caso (no se encuentra o el registro buscado es el último), $1$ cierre
-Complejidad algorítmica: $O(m)$
-Complejidad espacial: $E(1)$. La función solo mantiene un registro \texttt{Estudiante} a la vez en memoria
+\\[0.6cm]
+\textbf{Complejidad real:} $O(m + 2)$. $1$ apertura, hasta $m$ lecturas (\texttt{fread}) en el peor caso (no se encuentra o el registro buscado es el último), $1$ cierre
+\newline
+\textbf{Complejidad algorítmica:} $O(m)$
+\newline
+\textbf{Complejidad espacial:} $E(1)$. La función solo mantiene un registro \texttt{Estudiante} a la vez en memoria
 
 Esta función se invoca dos veces desde el flujo principal; una por el carnet de la nota menor y otra por el de la nota mayor.
 Por lo que el costo real de las dos búsquedas combinadas es $O(m+2) + O(m+2) = O(2m + 4)$
@@ -252,10 +293,12 @@ Agrupando términos semejantes:
 \[
 O(2n + 2m + 14)
 \]
-
-Complejidad real: $O(2n + 2m + 14)$
-Complejidad algorítmica: $O(n + m)$. Al eliminar constantes y factores menores
-Complejidad espacial: $E(n)$. Está dominada por el arreglo dinámico de historiales reservado en \texttt{cargarHistorial()}, ya que el resto de las funciones usa memoria constante.
+\newline
+\textbf{Complejidad real:} $O(2n + 2m + 14)$
+\newline
+\textbf{Complejidad algorítmica:} $O(n + m)$. Al eliminar constantes y factores menores
+\newline
+\textbf{Complejidad espacial:} $E(n)$. Está dominada por el arreglo dinámico de historiales reservado en \texttt{cargarHistorial()}, ya que el resto de las funciones usa memoria constante.
 
 \subsection{Tabla Resumen}
 
@@ -264,15 +307,16 @@ Complejidad espacial: $E(n)$. Está dominada por el arreglo dinámico de histori
 \toprule
 \textbf{Función} & \textbf{Complejidad algorítmica} & \textbf{Complejidad espacial} \\
 \midrule
-\texttt{contarRegistros()} & $O(1)$ & $E(1)$ \\
-\texttt{cargarHistorial()} & $O(n)$ & $E(n)$ \\
+\texttt{contarRegistros()} & $O(4)$ = $O(1)$ & $E(1)$ \\
+\texttt{cargarHistorial()} & $O(n + 3)$ = $O(n)$ & $E(n)$ \\
 \texttt{calcularEstadisticas()} & $O(n)$ & $E(1)$ \\
-\texttt{buscarEstudiante()} (nota menor) & $O(m)$ & $E(1)$ \\
-\texttt{buscarEstudiante()} (nota mayor) & $O(m)$ & $E(1)$ \\
+\texttt{buscarEstudiante()} (nota menor) & $O(m + 2)$ = $O(m)$& $E(1)$ \\
+\texttt{buscarEstudiante()} (nota mayor) & $O(m + 2)$ = $O(m)$ & $E(1)$ \\
 \texttt{construirReporte()} & $O(1)$ & $E(1)$ \\
 \texttt{imprimirReporte()} & $O(1)$ & $E(1)$ \\
 \midrule
 \textbf{Programa completo} & $O(n + m)$ & $E(n)$ \\
+\textbf{Programa completo (real)} & $O(2n + 2m + 14)$ & $E(n + 6)$ \\
 \bottomrule
 \end{tabular}
 \end{center}

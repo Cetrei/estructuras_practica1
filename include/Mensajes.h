@@ -10,11 +10,17 @@
 #define MENSAJE_ERROR_CARGA_HISTORIAL "No se pudo cargar el historial"
 
 #define MENSAJE_MENU_PREGUNTA "Desea generar datos de prueba o usar los archivos existentes?"
-#define MENSAJE_MENU_OPCION_GENERAR "1. Generar datos de prueba"
+#define MENSAJE_MENU_OPCION_GENERAR "1. Generar/sobrescribir datos de prueba"
 #define MENSAJE_MENU_OPCION_EXISTENTES "2. Usar archivos existentes (estudiantes.dat / historial.dat)"
 #define MENSAJE_MENU_PROMPT "Opcion: "
 #define MENSAJE_MENU_OPCION_INVALIDA "Opcion invalida, intentalo otra vez"
 #define MENSAJE_DATOS_GENERADOS "Datos de prueba generados exitosamente"
+#define MENSAJE_DATOS_CAPTURADOS "Datos capturados y guardados exitosamente"
+
+#define MENSAJE_SUBMENU_ADVERTENCIA "ADVERTENCIA: cualquiera de estas opciones sobrescribe el contenido actual de estudiantes.dat e historial.dat"
+#define MENSAJE_SUBMENU_OPCION_FIJOS "1. Usar datos de prueba fijos"
+#define MENSAJE_SUBMENU_OPCION_MANUAL "2. Introducir datos manualmente"
+#define MENSAJE_SUBMENU_PROMPT "Opcion: "
 
 #define REPORTE_TITULO                      "REPORTE DEL HISTORIAL ACADEMICO"
 #define REPORTE_CHAR_SEPARADOR              '='

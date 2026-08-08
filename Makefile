@@ -28,12 +28,15 @@ $(BIN_DIR)/Reporte.o: src/Reporte.c include/Reporte.h include/Utils.h include/Ti
 $(BIN_DIR)/Datos.o: src/Datos.c include/Datos.h include/Tipos.h | $(BIN_DIR)
 	$(CC) $(CFLAGS) -c src/Datos.c -o $(BIN_DIR)/Datos.o
 
-$(BIN_DIR)/Controlador.o: src/Controlador.c include/Controlador.h include/Bool.h include/Tipos.h include/Registros.h include/Reporte.h include/Datos.h include/Mensajes.h include/Resultado.h | $(BIN_DIR)
+$(BIN_DIR)/Captura.o: src/Captura.c include/Captura.h include/Tipos.h include/Utils.h include/Datos.h | $(BIN_DIR)
+	$(CC) $(CFLAGS) -c src/Captura.c -o $(BIN_DIR)/Captura.o
+
+$(BIN_DIR)/Controlador.o: src/Controlador.c include/Controlador.h include/Bool.h include/Tipos.h include/Registros.h include/Reporte.h include/Datos.h include/Captura.h include/Mensajes.h include/Resultado.h | $(BIN_DIR)
 	$(CC) $(CFLAGS) -c src/Controlador.c -o $(BIN_DIR)/Controlador.o
 
 # Paso 2: unir todos los .o
-$(NOMBRE_PROGRAMA): $(BIN_DIR)/main.o $(BIN_DIR)/Utils.o $(BIN_DIR)/Registros.o $(BIN_DIR)/Reporte.o $(BIN_DIR)/Datos.o $(BIN_DIR)/Controlador.o
-	$(CC) $(CFLAGS) -o $(NOMBRE_PROGRAMA) $(BIN_DIR)/main.o $(BIN_DIR)/Utils.o $(BIN_DIR)/Registros.o $(BIN_DIR)/Reporte.o $(BIN_DIR)/Datos.o $(BIN_DIR)/Controlador.o
+$(NOMBRE_PROGRAMA): $(BIN_DIR)/main.o $(BIN_DIR)/Utils.o $(BIN_DIR)/Registros.o $(BIN_DIR)/Reporte.o $(BIN_DIR)/Datos.o $(BIN_DIR)/Captura.o $(BIN_DIR)/Controlador.o
+	$(CC) $(CFLAGS) -o $(NOMBRE_PROGRAMA) $(BIN_DIR)/main.o $(BIN_DIR)/Utils.o $(BIN_DIR)/Registros.o $(BIN_DIR)/Reporte.o $(BIN_DIR)/Datos.o $(BIN_DIR)/Captura.o $(BIN_DIR)/Controlador.o
 
 # Paso 3: Limpiar
 clean:
