@@ -1,4 +1,4 @@
-PROJECT_NAME = "Practica 1 - EIF207 Estructuras de Datos"
+PROJECT_NAME = "Practica 1 | EIF207 Estructuras de Datos"
 PROJECT_BRIEF = "Fundamentos de Eficiencia Computacional y Tipos de datos Abstractos, Estructura Lineal: Arreglos dinamicos"
 OUTPUT_DIRECTORY = docs/doxygen
 INPUT = include src main.c
