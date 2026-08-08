@@ -35,6 +35,38 @@ static int calcularAnchoMaximo(char lineas[REPORTE_CANTIDAD_LINEAS][REPORTE_ANCH
 }
 
 /**
+ * @brief Cuenta los caracteres de cadena hasta el '\0', sin detenerse en '\n' o '\r'
+ * @param cadena Cadena de entrada
+ * @return Cantidad de caracteres antes del '\0'
+ *
+ */
+static int longitudReal(const char* cadena) {
+    int longitud = 0;
+    while (cadena[longitud] != '\0') {
+        longitud++;
+    }
+    return longitud;
+}
+
+/**
+ * @brief Agrega origen al final de destino, usando longitudReal() en vez de contarCaracteres()
+ * @param destino Cadena del reporte, puede contener '\n' ya escritos
+ * @param origen Texto a agregar (una linea ya armada, sin '\n')
+ * @return void
+ */
+static void agregarCadenaAlReporte(char* destino, const char* origen) {
+    int indiceDestino = longitudReal(destino);
+    int indiceOrigen = 0;
+
+    while (origen[indiceOrigen] != '\0') {
+        destino[indiceDestino] = origen[indiceOrigen];
+        indiceDestino++;
+        indiceOrigen++;
+    }
+    destino[indiceDestino] = '\0';
+}
+
+/**
  * @brief Arma cada linea individual del reporte (titulo y los 6 campos) a partir de los resultados
  * @param lineas Arreglo de salida donde se escribe cada linea ya formada
  * @param cantidadRegistros Cantidad total de historiales procesados
@@ -67,13 +99,25 @@ static int construirLineasDelReporte(char lineas[REPORTE_CANTIDAD_LINEAS][REPORT
 
 static void agregarSeparador(char* destino, int cantidad) {
     int indice;
-    int largo = contarCaracteres(destino);
+    int largo = longitudReal(destino);
 
     for (indice = 0; indice < cantidad; indice++) {
         destino[largo + indice] = REPORTE_CHAR_SEPARADOR;
     }
     destino[largo + cantidad] = '\n';
     destino[largo + cantidad + 1] = '\0';
+}
+
+/**
+ * @brief Agrega un caracter '\n' al final de destino
+ * @param destino Cadena a la que se le agrega el salto de linea
+ * @return void
+ *
+ */
+static void agregarSaltoDeLinea(char* destino) {
+    int largo = longitudReal(destino);
+    destino[largo] = '\n';
+    destino[largo + 1] = '\0';
 }
 
 void construirReporte(char destino[REPORTE_CAPACIDAD_MAX], int cantidadRegistros, ResultadosReporte resultados) {
@@ -85,13 +129,13 @@ void construirReporte(char destino[REPORTE_CAPACIDAD_MAX], int cantidadRegistros
 
     destino[0] = '\0';
     agregarSeparador(destino, anchoSeparador);
-    agregarTextoAlFinal(destino, lineas[0]);
-    agregarTextoAlFinal(destino, "\n");
+    agregarCadenaAlReporte(destino, lineas[0]);
+    agregarSaltoDeLinea(destino);
     agregarSeparador(destino, anchoSeparador);
 
     for (indiceLinea = 1; indiceLinea < REPORTE_CANTIDAD_LINEAS; indiceLinea++) {
-        agregarTextoAlFinal(destino, lineas[indiceLinea]);
-        agregarTextoAlFinal(destino, "\n");
+        agregarCadenaAlReporte(destino, lineas[indiceLinea]);
+        agregarSaltoDeLinea(destino);
     }
 
     agregarSeparador(destino, anchoSeparador);

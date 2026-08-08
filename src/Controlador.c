@@ -10,12 +10,26 @@
 #include "Captura.h"
 #include "Mensajes.h"
 #include "Resultado.h"
+#include "Utils.h"
 
 #define OPCION_GENERAR_DATOS 1
 #define OPCION_USAR_EXISTENTES 2
 
 #define OPCION_DATOS_PRUEBA_FIJOS 1
 #define OPCION_DATOS_MANUALES 2
+
+/**
+ * @brief Descarta el resto de la linea actual del buffer de entrada
+ * @return void
+ *
+ * Uso interno tras un scanf("%d", ...) de menu: scanf() deja el '\n' pendiente en el buffer
+ */
+static void limpiarBufferEntradaMenu(void) {
+    int caracter;
+    while ((caracter = getchar()) != '\n' && caracter != EOF) {
+        // descartar
+    }
+}
 
 /**
  * @brief Muestra el menu de inicio y lee la opcion escogida por el usuario
@@ -29,6 +43,7 @@ static int pedirOpcionDelMenu(void) {
     printf("%s\n", MENSAJE_MENU_OPCION_EXISTENTES);
     printf("%s", MENSAJE_MENU_PROMPT);
     scanf("%d", &opcion);
+    limpiarBufferEntradaMenu();
 
     return opcion;
 }
@@ -49,6 +64,7 @@ static int pedirOpcionSubmenuDatos(void) {
     printf("%s\n", MENSAJE_SUBMENU_OPCION_MANUAL);
     printf("%s", MENSAJE_SUBMENU_PROMPT);
     scanf("%d", &opcion);
+    limpiarBufferEntradaMenu();
 
     return opcion;
 }
@@ -101,6 +117,23 @@ static void prepararArchivos(void) {
 }
 
 /**
+ * @brief Inicializa un estudiante con valores que indican "no encontrado"
+ * @param estudiante Puntero al estudiante a inicializar
+ * @return void
+ *
+ * Se usa para inicializar los estudiantes de nota menor y mayor antes de buscar en estudiantes.dat, d
+ * Asi si no se encuentra el carnet correspondiente se pueda mostrar un mensaje en el reporte.
+*/
+static void inicializarEstudianteNoEncontrado(Estudiante* estudiante) {
+    copiarTexto(estudiante->carnet, "");
+    copiarTexto(estudiante->nombre, MENSAJE_ESTUDIANTE_NO_ENCONTRADO);
+    copiarTexto(estudiante->apellidos, "");
+    copiarTexto(estudiante->carrera, "");
+    estudiante->nivel = 0;
+}
+
+
+/**
  * @brief Calcula las estadisticas del historial y busca los estudiantes de nota menor y mayor
  * @param historiales Arreglo de historiales ya cargado en memoria
  * @param cantidadRegistros Cantidad de elementos en historiales
@@ -110,6 +143,9 @@ static ResultadosReporte procesarHistorial(const Historial historiales[], int ca
     ResultadosReporte resultados;
 
     resultados.estadisticas = calcularEstadisticas(historiales, cantidadRegistros);
+
+    inicializarEstudianteNoEncontrado(&resultados.estudianteNotaMenor);
+    inicializarEstudianteNoEncontrado(&resultados.estudianteNotaMayor);
 
     buscarEstudiante(ARCHIVO_ESTUDIANTES,  resultados.estadisticas.carnetNotaMenor, &resultados.estudianteNotaMenor);
     buscarEstudiante(ARCHIVO_ESTUDIANTES,  resultados.estadisticas.carnetNotaMayor, &resultados.estudianteNotaMayor);

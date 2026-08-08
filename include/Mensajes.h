@@ -8,6 +8,7 @@
 
 #define MENSAJE_SIN_REGISTROS "No existen registros"
 #define MENSAJE_ERROR_CARGA_HISTORIAL "No se pudo cargar el historial"
+#define MENSAJE_ESTUDIANTE_NO_ENCONTRADO "(no encontrado en estudiantes.dat)"
 
 #define MENSAJE_MENU_PREGUNTA "Desea generar datos de prueba o usar los archivos existentes?"
 #define MENSAJE_MENU_OPCION_GENERAR "1. Generar/sobrescribir datos de prueba"

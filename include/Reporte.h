@@ -4,7 +4,7 @@
 #include "Tipos.h"
 
 /**
- * @brief Tamano maximo para el buffer del reporte completo
+ * @brief Tamano maximo para la cadena del reporte completo
  *
  * El reporte tiene una cantidad fija de lineas:
  * - 1 titulo
