@@ -1,4 +1,8 @@
-# Práctica #1 — EIF207 Estructuras de Datos
+# Práctica #1 | EIF207 Estructuras de Datos
+![LaTeX](https://img.shields.io/badge/LaTeX-informe-008080?logo=latex&logoColor=white)
+![C](https://img.shields.io/badge/C-implementación-A8B9CC?logo=c&logoColor=white)
+![Docs: Doxygen](https://img.shields.io/badge/docs-doxygen-2C4AA8?logo=doxygen&logoColor=white)
+![Build: Make](https://img.shields.io/badge/build-make-427819?logo=gnu&logoColor=white)
 
 ## Documentación en línea
 **https://Cetrei.github.io/practica1/**
