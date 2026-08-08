@@ -11,21 +11,20 @@
  * - 6 campos (cantidad, nota menor, estudiante, nota mayor, estudiante, promedio)
  * - 3 separadores (arriba, entre titulo y cuerpo, abajo)
  *
- * @note Calculo manual del peor caso
+ * @note Calculo manual del peor caso, usando sizeof() de los campos de `Estudiante` (Tipos.h)
  *
- * Cada etiqueta ocupa 24 caracteres
- * El ancho de cada linea, en el peor caso segun el tamano de los campos del struct:
- *   - "Cantidad de registros : " + hasta 10 digitos (int cabe en 2147483647) = 34
- *   - "Nota menor/mayor/promedio : " + hasta 10 digitos (parte entera + '.' + 2 decimales + signo)                                          = 34
- *   - "Estudiante : " + nombre[40] (39 utiles) + " " + apellidos[40] (39 utiles) = 103
- *   - Titulo "REPORTE DEL HISTORIAL ACADEMICO" = 32
+ * La linea mas larga posible es la de estudiante, porque usa los arreglos de char mas grandes del struct:
+ *   "Estudiante : " (13) + sizeof(Estudiante.nombre) - 1 (39) + " " (1) + sizeof(Estudiante.apellidos) - 1 (39) = 92 caracteres
+ * (se resta 1 a cada arreglo porque el '\0' de nombre/apellidos no se copia entre medio, solo al final)
  *
- * El ancho maximo entre todas las lineas es 103 (linea de estudiante), y ese es el ancho que usa cada separador (agregarSeparador()).
+ * Al 92 ser el tam maximo; el spearador usa ese mismo valor: cada separador ocupa 92 caracteres + '\n'.
  *
- * Total en el peor caso, sumando cada linea + su '\n':
- *   3 separadores  : 3 * (103 + 1) =  312
- *   7 lineas       : (32+1) + (34+1) + (34+1) + (103+1) + (34+1) + (103+1) + (34+1) = 380
- *   TOTAL          : 312 + 380 =  692
+ * Total en el peor caso, sumando cada linea + su '\n' (usando 92 como ancho de linea para todas)
+ *   3 separadores : 3 * (92 + 1) = 279
+ *   7 lineas      : 7 * (92 + 1) = 651
+ *   TOTAL         : 279 + 651 = 930
+ *
+ * 2048 deja margen suficiente sobre ese peor caso (930 caracteres).
  */
 #define REPORTE_CAPACIDAD_MAX 2048
 

@@ -72,10 +72,7 @@ static int pedirOpcionSubmenuDatos(void) {
 /**
  * @brief Resuelve la opcion de "generar/sobrescribir datos de prueba" del menu principal
  * @return void
- *
- * Pregunta si se quieren los datos de prueba fijos (generarEstudiantes()/generarHistoriales())
- * o si se prefiere introducirlos a mano (capturarEstudiantes()/capturarHistoriales(), modulo
- * Captura.c). Ambos caminos sobrescriben estudiantes.dat e historial.dat por completo.
+ *0
  */
 static void generarDatosDePrueba(void) {
     int opcion = pedirOpcionSubmenuDatos();
@@ -100,8 +97,7 @@ static void generarDatosDePrueba(void) {
  * @brief Pregunta al usuario si desea generar/sobrescribir datos de prueba o usar los archivos existentes
  * @return void
  *
- * Repite la pregunta hasta recibir una opcion valida. Si se escoge sobrescribir, delega en
- * generarDatosDePrueba() el submenu que decide entre datos fijos o captura manual.
+ * Repite la pregunta hasta recibir una opcion valida
  */
 static void prepararArchivos(void) {
     int opcion = pedirOpcionDelMenu();
@@ -147,8 +143,8 @@ static ResultadosReporte procesarHistorial(const Historial historiales[], int ca
     inicializarEstudianteNoEncontrado(&resultados.estudianteNotaMenor);
     inicializarEstudianteNoEncontrado(&resultados.estudianteNotaMayor);
 
-    buscarEstudiante(ARCHIVO_ESTUDIANTES,  resultados.estadisticas.carnetNotaMenor, &resultados.estudianteNotaMenor);
-    buscarEstudiante(ARCHIVO_ESTUDIANTES,  resultados.estadisticas.carnetNotaMayor, &resultados.estudianteNotaMayor);
+    buscarEstudiante(ARCHIVO_ESTUDIANTES, resultados.estadisticas.carnetNotaMenor, &resultados.estudianteNotaMenor);
+    buscarEstudiante(ARCHIVO_ESTUDIANTES, resultados.estadisticas.carnetNotaMayor, &resultados.estudianteNotaMayor);
 
     return resultados;
 }

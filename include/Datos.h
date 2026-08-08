@@ -14,7 +14,6 @@
  * @brief Crea el directorio "data/" si no existe todavia
  * @return void
  *
- * @note Complejidad: O(1)
  */
 void asegurarDirectorioDatos(void);
 

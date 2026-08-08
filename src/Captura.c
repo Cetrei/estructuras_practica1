@@ -41,7 +41,7 @@ static void limpiarBufferEntrada(void) {
 /**
  * @brief Pregunta si se desea capturar otro registro
  * @param mensaje Texto de la pregunta, mostrado antes de leer la respuesta
- * @return 'S' o 'N' (mayuscula), sin validar mas alla de eso
+ * @return 'S' o 'N' (mayuscula), sin validar
  */
 static char preguntarSiDeseaOtro(const char* mensaje) {
     char respuesta;
