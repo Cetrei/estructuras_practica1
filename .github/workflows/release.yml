@@ -1,0 +1,45 @@
+name: Publicar release de entrega
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NOMBRE_ENTREGA: practica1_JoanferHidalgoChaves
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Compilar el ejecutable
+        run: make
+
+      - name: Compilar el documento tecnico en LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: docs
+          root_file: documentoTecnico.tex
+
+      - name: Armar la carpeta de entrega
+        run: |
+          mkdir -p "$NOMBRE_ENTREGA/codigo"
+          cp practica1 "$NOMBRE_ENTREGA/"
+          cp docs/documentoTecnico.pdf "$NOMBRE_ENTREGA/"
+          cp main.c "$NOMBRE_ENTREGA/codigo/"
+          cp -r src "$NOMBRE_ENTREGA/codigo/"
+          cp -r include "$NOMBRE_ENTREGA/codigo/"
+
+      - name: Comprimir la entrega
+        run: zip -r "$NOMBRE_ENTREGA.zip" "$NOMBRE_ENTREGA"
+
+      - name: Publicar el release con el zip adjunto
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.NOMBRE_ENTREGA }}.zip
+          generate_release_notes: true
