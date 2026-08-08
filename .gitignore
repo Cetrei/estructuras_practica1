@@ -1,9 +1,14 @@
 bin/
+data/
 
 docs/*.aux
 docs/*.log
 docs/*.out
 docs/*.toc
 docs/*.pdf
+docs/*.synctex.gz
+docs/*.fdb_latexmk
+docs/*.fls
 
 docs/doxygen/
+docs/documentoTecnico.synctex.gz
