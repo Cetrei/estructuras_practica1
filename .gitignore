@@ -10,5 +10,7 @@ docs/*.synctex.gz
 docs/*.fdb_latexmk
 docs/*.fls
 
+.entrega/
+
 docs/doxygen/
 docs/documentoTecnico.synctex.gz
