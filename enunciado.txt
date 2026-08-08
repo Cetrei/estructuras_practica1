@@ -1,0 +1,182 @@
+Universidad Nacional
+
+Escuela de Informática y computación
+
+Curso: EIF207 Estructuras de Datos
+
+II Ciclo 2026 Msc. Johnny Villalobos Murillo
+
+PRÁCTICA #1
+
+UNIDAD 1 y 2
+
+Fundamentos de Eficiencia Computacional y Tipos de datos Abstractos, Estructura Lineal: Arreglos dinamicos
+
+Descripción
+
+La Universidad X dispone de dos archivos binarios que contienen
+información de los estudiantes y de su historial académico. El objetivo
+de esta práctica es leer la información almacenada en dichos archivos,
+cargar el historial académico en un arreglo dinámico y generar un
+reporte con estadísticas del rendimiento académico de los estudiantes.
+
+Esta práctica tiene como propósito reforzar el uso de estructuras
+(struct), archivos binarios, memoria dinámica, recorridos de arreglos,
+búsqueda de información y análisis del costo computacional.
+
+Objetivo General
+
+Implementar un programa que permita analizar la información de un
+historial académico almacenado en archivos binarios mediante el uso de
+estructuras y arreglos dinámicos.
+
+Objetivos Específicos
+
+-   Utilizar estructuras (struct) para representar la información de
+    estudiantes y del historial académico.
+-   Leer información almacenada en archivos binarios.
+-   Utilizar memoria dinámica para almacenar registros.
+-   Cargar registros desde un archivo binario hacia un arreglo dinámico.
+-   Recorrer un arreglo dinámico para obtener estadísticas.
+-   Realizar búsquedas de información en un archivo binario.
+-   Analizar el costo computacional de las operaciones implementadas.
+
+Archivos suministrados
+
+El docente proporcionará los siguientes archivos binarios:
+
+-   estudiantes.dat
+-   historial.dat
+
+Los archivos ya contienen información previamente registrada, por lo que
+no es necesario desarrollar programas para insertar o modificar
+registros.
+
+Estructura Estudiante
+
+Cada registro del archivo estudiantes.dat contiene la siguiente
+información:
+
+-   Carnet
+-   Nombre
+-   Apellidos
+-   Carrera
+-   Nivel
+
+Estructura Historial
+
+Cada registro del archivo historial.dat contiene la siguiente
+información:
+
+-   Carnet
+-   Código del curso
+-   Nombre del curso
+-   Ciclo
+-   Año
+-   Nota
+
+Actividades
+
+Parte 1. Lectura del archivo
+
+1.  Abrir el archivo binario historial.dat.
+2.  Determinar la cantidad de registros almacenados.
+
+Parte 2. Creación del arreglo dinámico
+
+1.  Reservar memoria dinámica suficiente para almacenar todos los
+    registros del archivo.
+2.  Cargar todos los registros del archivo historial.dat en el arreglo
+    dinámico.
+
+Parte 3. Procesamiento de la información
+
+Recorrer el arreglo dinámico para determinar:
+
+-   Cantidad total de registros.
+-   Nota menor.
+-   Nombre completo del estudiante que obtuvo la nota menor.
+-   Nota mayor.
+-   Nombre completo del estudiante que obtuvo la nota mayor.
+-   Nota promedio de todas las notas registradas.
+
+Para obtener el nombre del estudiante, el programa deberá localizar el
+carnet correspondiente en el archivo estudiantes.dat mediante una
+búsqueda secuencial.
+
+Parte 4. Reporte
+
+El programa deberá mostrar el siguiente reporte:
+
+=========================================
+
+REPORTE DEL HISTORIAL ACADÉMICO
+
+=========================================
+
+Cantidad de registros : __________
+
+Nota menor : __________
+
+Estudiante : ______________________________
+
+Nota mayor : __________
+
+Estudiante : ______________________________
+
+Nota promedio : __________
+
+=========================================
+
+Restricciones
+
+-   Utilizar estructuras (struct).
+-   Utilizar archivos binarios.
+-   Utilizar memoria dinámica (new y delete).
+-   No utilizar la clase vector.
+-   No utilizar bases de datos.
+-   No modificar el contenido de los archivos suministrados.
+-   Toda la información deberá obtenerse a partir de los archivos
+    binarios proporcionados.
+
+Entregables
+
+1.  Código fuente completamente documentado.
+
+2.  Programa ejecutable.
+
+3.  Documento técnico que incluya:
+
+    -   Descripción de las estructuras utilizadas.
+
+    -   Algoritmo para determinar la cantidad de registros del archivo.
+
+    -   Algoritmo para cargar el arreglo dinámico.
+
+    -   Algoritmo para calcular la nota menor, la nota mayor y la nota
+        promedio.
+
+    -   Algoritmo utilizado para localizar el estudiante correspondiente
+        a la nota menor y a la nota mayor.
+
+    -   Análisis del costo computacional de las siguientes operaciones:
+
+        -   Determinar la cantidad de registros.
+        -   Cargar el arreglo dinámico.
+        -   Buscar la nota menor.
+        -   Buscar la nota mayor.
+        -   Calcular la nota promedio.
+        -   Buscar el estudiante asociado a la nota menor.
+        -   Buscar el estudiante asociado a la nota mayor.
+
+Criterios de Evaluación
+
+  ----------------------------------------------------------------------- -----
+  Lectura correcta de los archivos binarios                               20%
+  Uso adecuado de memoria dinámica                                        20%
+  Procesamiento correcto del arreglo dinámico                             20%
+  Búsqueda correcta del estudiante asociado a las notas mínima y máxima   20%
+  Documentación y análisis del costo computacional                        20%
+  ----------------------------------------------------------------------- -----
+
+Valor total de la práctica: 100 puntos.

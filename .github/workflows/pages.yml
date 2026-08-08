@@ -1,0 +1,62 @@
+name: Publicar documentacion
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Doxygen
+        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
+
+      - name: Descargar tema oscuro doxygen-awesome-css
+        run: |
+          git clone --depth 1 https://github.com/jothepro/doxygen-awesome-css.git doxygen-awesome-css
+
+      - name: Generar documentacion del codigo con Doxygen
+        run: doxygen Doxyfile
+
+      - name: Compilar el documento tecnico en LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: docs
+          root_file: documentoTecnico.tex
+
+      - name: Armar el sitio final
+        run: |
+          mkdir -p sitio
+          cp -r docs/doxygen/html sitio/codigo
+          cp docs/documentoTecnico.pdf sitio/
+          cp docs/index.html sitio/index.html
+          cp docs/estilo.css sitio/estilo.css
+
+      - name: Subir artefacto de Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: sitio
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

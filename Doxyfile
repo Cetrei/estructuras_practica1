@@ -1,0 +1,41 @@
+PROJECT_NAME = "Practica 1 - EIF207 Estructuras de Datos"
+PROJECT_BRIEF = "Fundamentos de Eficiencia Computacional y Tipos de datos Abstractos, Estructura Lineal: Arreglos dinamicos"
+OUTPUT_DIRECTORY = docs/doxygen
+INPUT = include src main.c
+FILE_PATTERNS = *.h *.c
+RECURSIVE = YES
+
+OUTPUT_LANGUAGE = Spanish
+
+GENERATE_LATEX = NO
+GENERATE_HTML = YES
+HTML_OUTPUT = html
+
+EXTRACT_ALL = YES
+EXTRACT_STATIC = YES
+JAVADOC_AUTOBRIEF = YES
+
+SOURCE_BROWSER = YES
+INLINE_SOURCES = YES
+
+HAVE_DOT = NO
+CALL_GRAPH = NO
+
+QUIET = YES
+WARN_IF_UNDOCUMENTED = YES
+
+# Tema oscuro: doxygen-awesome-css (se descarga en el workflow y se
+# referencia aca via HTML_EXTRA_STYLESHEET / HTML_EXTRA_FILES).
+GENERATE_TREEVIEW = YES
+
+HTML_EXTRA_STYLESHEET = 
+doxygen-awesome-css/doxygen-awesome.css \
+doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
+doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css
+
+HTML_EXTRA_FILES = 
+doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+doxygen-awesome-css/doxygen-awesome-paragraph-link.js
+
+HTML_HEADER = docs/doxygen-header.html
