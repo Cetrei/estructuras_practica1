@@ -6,9 +6,26 @@
  * - Esto para facilitar tests y ya que no encontre los archivos .dat originales en el aula
  */
 
-#define DIRECTORIO_DATOS "data"
-#define ARCHIVO_ESTUDIANTES "data/estudiantes.dat"
-#define ARCHIVO_HISTORIAL "data/historial.dat"
+/**
+ * @brief Ruta absoluta al directorio "data/" ubicado junto al ejecutable
+ * @return Puntero a buffer estatico interno, valido hasta la siguiente llamada
+ */
+const char* rutaDirectorioDatos(void);
+
+/**
+ * @brief Ruta absoluta a "data/estudiantes.dat" junto al ejecutable
+ * @return Puntero a buffer estatico interno, valido hasta la siguiente llamada
+ */
+const char* rutaArchivoEstudiantes(void);
+
+/**
+ * @brief Ruta absoluta a "data/historial.dat" junto al ejecutable
+ * @return Puntero a buffer estatico interno, valido hasta la siguiente llamada
+ */
+const char* rutaArchivoHistorial(void);
+
+#define ARCHIVO_ESTUDIANTES rutaArchivoEstudiantes()
+#define ARCHIVO_HISTORIAL rutaArchivoHistorial()
 
 /**
  * @brief Crea el directorio "data/" si no existe todavia
